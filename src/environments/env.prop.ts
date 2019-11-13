@@ -8,7 +8,6 @@ export const db: ConnectionOptions = {
   password: '123456',
   database: 'test',
   logging: true,
-  synchronize: true,
   timezone: '+08:00',
   dateStrings: true,
   entities: ['../**/*.entity.ts']
