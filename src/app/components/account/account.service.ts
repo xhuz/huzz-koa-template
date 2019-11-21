@@ -2,12 +2,11 @@ import {UserModel} from '../../entities/user/user.model';
 import {CustomError} from '../../core/error';
 import {User} from '../../entities/user/user.entity';
 import {cryptoPassword} from '../../utils/crypto';
+import {Injectable} from 'koa-route-decors';
 
+@Injectable()
 export class AccountService {
-  private userModel: UserModel;
-  constructor() {
-    this.userModel = new UserModel();
-  }
+  constructor(private userModel: UserModel) {}
 
   async insert(username: string, password: string, nickname: string = '') {
     const exist = await this.userModel.findByUsername(username);

@@ -1,6 +1,6 @@
 {
-  "watch": ["src", "bin/www"],
+  "watch": ["src", "bin/www.ts"],
   "ext": "ts, *",
-  "exec": "ts-node bin/www",
+  "exec": "ts-node bin/www.ts",
   "delay": 300
 }

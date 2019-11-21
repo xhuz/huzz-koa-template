@@ -1,7 +1,9 @@
 import {User} from './user.entity';
 import {getRepository, Repository} from 'typeorm';
 import {cryptoPassword} from '../../utils/crypto';
+import {Injectable} from 'koa-route-decors';
 
+@Injectable()
 export class UserModel {
   private repository: Repository<User>;
   private select: (keyof User)[] = ['id', 'username', 'nickname'];

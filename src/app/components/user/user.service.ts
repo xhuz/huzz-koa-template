@@ -1,10 +1,9 @@
 import {UserModel} from '../../entities/user/user.model';
+import {Injectable} from 'koa-route-decors';
 
+@Injectable()
 export class UserService {
-  private userModel: UserModel;
-  constructor() {
-    this.userModel = new UserModel();
-  }
+  constructor(private userModel: UserModel) {}
 
   async getUserInfo(id: number) {
     const user = await this.userModel.findById(id);

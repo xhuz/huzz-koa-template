@@ -6,7 +6,7 @@ import {AccountService} from './account.service';
 
 @Controller()
 export class AccountController {
-  private accountService: AccountService = new AccountService();
+  constructor(private accountService: AccountService) {}
   @Post()
   async register(ctx: Context, next: () => Promise<any>) {
     const {username, password, nickname} = ctx.request.body;
@@ -21,7 +21,6 @@ export class AccountController {
 
   @Post()
   async login(ctx: Context, next: () => Promise<any>) {
-    console.log(this);
     const {username, password} = ctx.request.body;
     const user = await this.accountService.verifyPassword(username, password);
     const token = jwt.sign({username: user.username, id: user.id}, JWT_SECRET, {expiresIn: '30d'});
