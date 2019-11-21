@@ -1,5 +1,5 @@
 import * as dev from './env.dev';
-import * as prop from './env.prop';
+import * as prop from './env.prod';
 
 const env = process.env.NODE_ENV;
 
