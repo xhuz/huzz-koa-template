@@ -2,14 +2,14 @@ import {createConnection, ConnectionOptions, Logger, QueryRunner} from 'typeorm'
 import {environment} from '../../environments';
 import {mysqlLogger} from '../core/logger';
 
-export function connection() {
+export async function connection() {
   const config: ConnectionOptions = environment.db as any;
   Object.assign(config, {logger: new DbLogger()});
-  createConnection(config).then(() => {
-    console.log('mysql connect success');
-  }).catch(err => {
-    mysqlLogger.error(err);
-  });
+  try {
+    return await createConnection(config);
+  } catch (error) {
+    mysqlLogger.error(error);
+  }
 }
 
 class DbLogger implements Logger {

@@ -14,12 +14,17 @@ import {connection} from './database';
 
 export class App {
   private app: Koa;
-  constructor() {
+  constructor(port: number) {
     this.app = new Koa();
-    this.init().catch(err => console.log(err));
+    this.init().then(() => {
+      this.start(port);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   private async init() {
+    await connection();
     const router = new Router();
     const subRouter = await autoRouter(resolve(__dirname, './'));
     router.use(subRouter.routes(), jwt);
@@ -36,9 +41,8 @@ export class App {
       .use(responseHandle);
   }
 
-  start(port: number) {
+  private start(port: number) {
     this.app.listen(port, () => {
-      connection();
       console.log('service is started');
     });
   }
